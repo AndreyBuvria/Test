@@ -1,0 +1,8 @@
+<div class="choices">
+  <div
+  class="choices-test"
+  *ngFor="let topic of topics"
+  [routerLink]="['/test/',topic | lowercase]">
+    <p class="choices-test__topic">{{ topic }}</p>
+  </div>
+</div>

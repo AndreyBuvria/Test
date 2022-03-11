@@ -1,0 +1,42 @@
+@import '/src/assets/scss-assets/vars';
+
+.container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+@media (min-width: 960px) {
+  .container {
+    max-width: 1180px;
+  }
+}
+/*---------------------- */
+a {
+  text-decoration: none;
+}
+
+.header {
+  background: $background;
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px 25px;
+
+    .header-logo {
+      h1 {
+        a {
+          font-size: 24px;
+          color: #fff;
+          transition: all 0.5s ease;
+          &:hover {
+            filter: brightness(1.75);
+          }
+        }
+      }
+    }
+  }
+}

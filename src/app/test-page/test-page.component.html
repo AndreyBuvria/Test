@@ -1,0 +1,22 @@
+<!--<div *ngIf="!quizForm && !timerObj">
+  <app-loading-placeholder></app-loading-placeholder>
+</div>
+<div class="quiz">
+  <div class="quiz-timer">
+    <p class="quiz-timer__time">{{ timerObj?.display }}</p>
+  </div>
+  <div class="quiz-form">
+    <h1 class="quiz-form__name">{{ quizForm?.question }}</h1>
+    <ul class="quiz-form__answers answers">
+      <li class="quiz-form__answer" *ngFor="let quiz of quizForm?.answers">
+        <input
+          name="radioInput"
+          type="radio"
+          class="quiz-form__input"
+          (click)="choiseMark = quiz">
+        <span for="input" class="quiz-form__label">{{ quiz }}</span>
+      </li>
+    </ul>
+    <button type="button" (click)="onNextQuiz()">OK</button>
+  </div>
+</div>--->
