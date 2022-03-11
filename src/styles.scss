@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'assets/scss-assets/reset';
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600&display=swap');
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  li {
+    list-style: none;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}

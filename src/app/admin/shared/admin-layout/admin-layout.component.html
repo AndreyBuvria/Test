@@ -1,0 +1,37 @@
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <div class="header-logo">
+        <h1><a href="#">Tests</a></h1>
+      </div>
+      <nav class="header-nav">
+        <ul
+          class="header-nav__links"
+          *ngIf="auth.isAuthenticated(); else login"
+          >
+          <li class="header-nav__link" routerLinkActive="active">
+            <a [routerLink]="['/admin','add']">Add Test</a>
+          </li>
+          <li class="header-nav__link" routerLinkActive="active">
+            <a [routerLink]="['/admin','tests']">Test List</a></li>
+          <li class="header-nav__link">
+            <a [routerLink]="['/admin','login']" (click)="auth.logout()">Logout</a>
+          </li>
+          <li class="header-nav__link" routerLinkActive="active">
+            <a [routerLink]="['/admin','login']">Login</a>
+          </li>
+        </ul>
+        <ng-template #login>
+          <ul class="header-nav__links" >
+            <li class="header-nav__link" routerLinkActive="active">
+              <a [routerLink]="['/admin','login']">Login</a>
+            </li>
+          </ul>
+        </ng-template>
+      </nav>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
