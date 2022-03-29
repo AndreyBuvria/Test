@@ -1,8 +1,9 @@
 <div class="choices">
   <div
   class="choices-test"
-  *ngFor="let topic of topics"
-  [routerLink]="['/test/',topic | lowercase]">
-    <p class="choices-test__topic">{{ topic }}</p>
+  *ngFor="let data of previewData"
+  [routerLink]="['/test', data.topic]"
+  [queryParams]="{'id': data.id}">
+    <p class="choices-test__topic">{{ data.topic }}</p>
   </div>
 </div>
