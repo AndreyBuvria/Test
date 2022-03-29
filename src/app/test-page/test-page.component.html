@@ -1,22 +1,29 @@
-<!--<div *ngIf="!quizForm && !timerObj">
+<div *ngIf="!quizForm && !timerObj; else quiz">
   <app-loading-placeholder></app-loading-placeholder>
 </div>
-<div class="quiz">
-  <div class="quiz-timer">
-    <p class="quiz-timer__time">{{ timerObj?.display }}</p>
+<ng-template #quiz>
+  <div *ngIf="!testStatus">
+    <div class="quiz">
+      <div class="quiz-timer">
+        <p class="quiz-timer__time">{{ timerObj?.display }}</p>
+      </div>
+      <div class="quiz-form">
+        <h1 class="quiz-form__name">{{ quizForm?.question }}</h1>
+        <ul class="quiz-form__answers answers">
+          <li class="quiz-form__answer" *ngFor="let quiz of quizForm?.optionsAnswers; let i = index">
+            <input
+              name="radioInput"
+              type="radio"
+              class="quiz-form__input"
+              id="{{i}}"
+              (click)="setAnswer(i)">
+            <span for="input" class="quiz-form__label">{{ quiz }}</span>
+          </li>
+        </ul>
+        <button type="button" class="btnForm" (click)="onNextQuiz()">Next question</button>
+      </div>
+    </div>
   </div>
-  <div class="quiz-form">
-    <h1 class="quiz-form__name">{{ quizForm?.question }}</h1>
-    <ul class="quiz-form__answers answers">
-      <li class="quiz-form__answer" *ngFor="let quiz of quizForm?.answers">
-        <input
-          name="radioInput"
-          type="radio"
-          class="quiz-form__input"
-          (click)="choiseMark = quiz">
-        <span for="input" class="quiz-form__label">{{ quiz }}</span>
-      </li>
-    </ul>
-    <button type="button" (click)="onNextQuiz()">OK</button>
-  </div>
-</div>--->
+  <app-result-page [topicTest]="testTopic" [selectedAnswers]="answers"></app-result-page>
+</ng-template>
+

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription} from 'rxjs';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { interval, map, Observable, Subscription, take, takeWhile} from 'rxjs';
 import { QuizForm, Timer } from '../shared/interfaces';
 import { QuizService } from '../shared/quiz.service';
 
@@ -14,23 +14,77 @@ export class TestPageComponent implements OnInit, OnDestroy {
   public timerObj!: Timer;
   //public quizForm!: QuizForm;
   public choiseMark!: object;
+  public quizForm!: QuizForm;
+  public quizId: number = 0;
+  public testStatus = true;
+  public testTopic!: string;
+  public answers: number[] = [];
 
+  private clickOption!: number;
   private subscription!: Subscription;
-  private answersMark!: object[];
+  private idTest!: string;
 
   constructor(
-    private quiz: QuizService,) { }
+    private quiz: QuizService,
+    private router: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getTimer();
+    this.getTimer(2);
+
+    this.router.queryParams.subscribe((params: Params) => {
+      this.idTest = params['id'];
+    });
+
+    this.setQuiz(this.idTest, this.quizId);
+  }
+
+  public onTimer(minutes: number): Observable<Timer> {
+    return new Observable<Timer>(
+      subscriber => {
+        interval(1000)
+          .pipe(take(minutes * 60))
+          .pipe(takeWhile(x => x >= 0))
+          .pipe(map(v => minutes * 60 - 1 - v))
+          .subscribe(countdown => {
+            const minutes = Math.floor(countdown / 60);
+            const seconds = countdown - minutes * 60;
+
+            subscriber.next({
+              display: `${("0" + minutes.toString()).slice(-2)}:${("0" + seconds.toString()).slice(-2)}`,
+              minutes: minutes,
+              seconds: seconds
+            });
+
+            if (seconds <= 0 && minutes <= 0) {
+              subscriber.complete();
+            }
+          });
+      }
+    )
+  }
+
+  public setAnswer(idOption: number) {
+    this.clickOption = idOption;
+    console.log(this.clickOption);
   }
 
   public onNextQuiz() {
-    this.answersMark!.push(this.choiseMark);
+    this.answers.push(this.clickOption);
+    this.quizId++;
+
+    this.setQuiz(this.idTest, this.quizId);
+
+    console.log(this.answers);
   }
 
-  private getTimer() {
-    this.subscription = this.quiz.onTimer(2).subscribe(response => {
+  private setQuiz(idTest: string, idQuiz: number = 0) {
+    this.quiz.getQuiz(idTest, idQuiz).subscribe(dataQuiz => {
+      this.quizForm = dataQuiz;
+    })
+  }
+
+  private getTimer(minutes: number) {
+    this.subscription = this.onTimer(minutes).subscribe(response => {
       this.timerObj = response;
     });
   }

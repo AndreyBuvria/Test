@@ -11,6 +11,7 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { TestPageComponent } from './test-page/test-page.component';
 import { LoadingPlaceholderComponent } from './shared/loading-placeholder/loading-placeholder.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ResultPageComponent } from './test-page/result-page/result-page.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     StartPageComponent,
     DashboardPageComponent,
     TestPageComponent,
-    LoadingPlaceholderComponent
+    LoadingPlaceholderComponent,
+    ResultPageComponent
   ],
   imports: [
     BrowserModule,

@@ -5,11 +5,15 @@ export interface Timer {
 }
 export interface QuizForm {
   question: string,
-  answers: string[],
+  optionsAnswers: string[],
   markAnswer: number
 }
 /* */
 export interface ResponseBody {
   expiresIn: string | number,
   idToken: string;
+}
+export interface PreviewData {
+  topic: string,
+  id: number
 }
