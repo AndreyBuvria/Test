@@ -17,3 +17,7 @@ export interface PreviewData {
   topic: string,
   id: number
 }
+export interface DataResult {
+  correct: number,
+  uncorrect: number
+}

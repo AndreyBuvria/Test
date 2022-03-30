@@ -16,13 +16,13 @@ export class TestPageComponent implements OnInit, OnDestroy {
   public choiseMark!: object;
   public quizForm!: QuizForm;
   public quizId: number = 0;
-  public testStatus = true;
-  public testTopic!: string;
+  public testStatus = false;
+  //public testTopic!: string;
   public answers: number[] = [];
+  public idTest!: string;
 
   private clickOption!: number;
   private subscription!: Subscription;
-  private idTest!: string;
 
   constructor(
     private quiz: QuizService,
@@ -65,7 +65,6 @@ export class TestPageComponent implements OnInit, OnDestroy {
 
   public setAnswer(idOption: number) {
     this.clickOption = idOption;
-    console.log(this.clickOption);
   }
 
   public onNextQuiz() {
@@ -79,6 +78,7 @@ export class TestPageComponent implements OnInit, OnDestroy {
 
   private setQuiz(idTest: string, idQuiz: number = 0) {
     this.quiz.getQuiz(idTest, idQuiz).subscribe(dataQuiz => {
+      if(dataQuiz == undefined || null) { this.testStatus = true; }
       this.quizForm = dataQuiz;
     })
   }

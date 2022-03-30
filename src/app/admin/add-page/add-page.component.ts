@@ -86,18 +86,15 @@ export class AddPageComponent implements OnInit,OnDestroy {
   public submit() {
     this.submitted = true;
 
-    console.log(this.getQuizzesGroups().value);
-    console.log(this.form);
-
     const testForm = {
       topic: this.form.get('topic')!.value,
       quizzes: {...this.getQuizzesGroups().value},
       id: this.generateID(this.currLength,4),
     };
 
-   /* this.subscription = this.quizService.createTest(testForm).subscribe(res => {
+    this.subscription = this.quizService.createTest(testForm).subscribe(res => {
       console.log(res);
-    });*/
+    });
     //console.log(testForm);
 
     this.submitted = false;
