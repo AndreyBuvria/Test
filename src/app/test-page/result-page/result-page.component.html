@@ -1,17 +1,17 @@
 <div class="container">
   <div class="result">
-    <h1 class="result__heading">Result of <b>{{ topicTest }}</b></h1>
+    <h1 class="result__heading">Result of test</h1>
 
     <section class="result__body">
-      <h2>Conclusion</h2>
+      <h2>You have</h2>
 
       <ul class="result__icons icons">
         <li class="icons__item icons__item_green">
-          <span>0</span>
+          <span>{{ dataResult?.correct }}</span>
         </li>
 
         <li class="icons__item icons__item_red">
-          <span>0</span>
+          <span>{{ dataResult?.uncorrect }}</span>
         </li>
       </ul>
 

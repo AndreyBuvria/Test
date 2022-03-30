@@ -2,7 +2,7 @@
   <app-loading-placeholder></app-loading-placeholder>
 </div>
 <ng-template #quiz>
-  <div *ngIf="!testStatus">
+  <div *ngIf="!testStatus; else result">
     <div class="quiz">
       <div class="quiz-timer">
         <p class="quiz-timer__time">{{ timerObj?.display }}</p>
@@ -24,6 +24,10 @@
       </div>
     </div>
   </div>
-  <app-result-page [topicTest]="testTopic" [selectedAnswers]="answers"></app-result-page>
+  <ng-template #result>
+    <app-result-page
+      [selectedAnswers]="answers"
+      [idTest]="idTest"></app-result-page>
+  </ng-template>
 </ng-template>
 
